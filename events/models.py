@@ -9,6 +9,19 @@ from users.models import Person
 # Create your models here.
 
 
+def isDateValid(value):
+    if value <= datetime.date.today():
+        raise ValidationError("date must be in the future")
+    return value
+
+
+def isTitleValid(value):
+    pattern = '[A-Z]+[a-z]+$'
+    if not re.match(pattern, str(value)):
+        raise ValidationError("Title is invalid")
+    return value
+
+    
 def is_date_event(value):
     if value <= date.today():
         raise ValidationError('Event date is incorrect!!!')
